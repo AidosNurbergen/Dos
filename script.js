@@ -1,7 +1,7 @@
 function getAPIUrl(endpoint) {
     const idInstance = document.getElementById('idInstance').value;
     const apiTokenInstance = document.getElementById('apiTokenInstance').value;
-    return `https://api.green-api.com/waInstance${idInstance}/${endpoint}/${apiTokenInstance}`;
+    return `https://7103.api.greenapi.com/waInstance${idInstance}/${endpoint}/${apiTokenInstance}`;
 }
 
 async function fetchAPI(endpoint, options = {}) {
@@ -19,7 +19,7 @@ async function fetchAPI(endpoint, options = {}) {
     } catch (error) {
         console.error('Error fetching API:', error);
         appendResponse('Error', error.message);
-        throw error;
+        throw error; // re-throw the error after logging it
     }
 }
 
@@ -56,8 +56,9 @@ async function sendMessage() {
         const result = await fetchAPI('sendMessage', {
             method: 'POST',
             body: JSON.stringify({
-                phoneNumber,
-                messageText
+                chatId: `${phoneNumber}@c.us`,
+                message: messageText,
+                quotedMessageId: '7103955621' // QuotedMessageId is set to a constant value for demo purposes
             })
         });
         appendResponse('sendMessage', result);
