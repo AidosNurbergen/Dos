@@ -19,7 +19,7 @@ async function fetchAPI(endpoint, options = {}) {
     } catch (error) {
         console.error('Error fetching API:', error);
         appendResponse('Error', error.message);
-        throw error; // re-throw the error after logging it
+        throw error;
     }
 }
 
